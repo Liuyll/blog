@@ -1,10 +1,10 @@
-# server
+# blog-server
 
 
 
 ## QuickStart
 
-<!-- add docs here for user -->
+server是基于egg2开发的上层框架
 
 see [egg docs][egg] for more detail.
 
@@ -13,21 +13,20 @@ see [egg docs][egg] for more detail.
 ```bash
 $ npm i
 $ npm run dev
-$ open http://localhost:7001/
+$ swagger-ui swaggerui/index
 ```
-
-### Deploy
-
-```bash
-$ npm start
-$ npm stop
-```
-
-### npm scripts
-
-- Use `npm run lint` to check code style.
-- Use `npm test` to run unit test.
-- Use `npm run autod` to auto detect dependencies upgrade, see [autod](https://www.npmjs.com/package/autod) for more detail.
 
 
 [egg]: https://eggjs.org
+
+## 技术栈
+
++ 搜索引擎/日志分析:ELK
+
++ 二级缓存:redis5.0
+
++ 数据库:mongo4
+
++ 全文搜索引擎(英文):mongo
+
+  
