@@ -1,0 +1,1 @@
+console.log(require('./test1.js').b)
