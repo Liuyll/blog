@@ -14,6 +14,10 @@ function safe_parse(tar){
     return _.flow(_attemptParse,_judgeResult,_handle)(tar)
 }
 
+function promiseExecute(cb,...func){
+    Promise.all(func,() => cb)
+}
 export {
+    promiseExecute,
     safe_parse
 }

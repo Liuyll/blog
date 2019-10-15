@@ -11,7 +11,7 @@ module.exports = {
                 identify = jwt.verify(secure, 'screat')
                 return identify ? identify.auth : 'none'
             } catch (error) {
-                console.log(`auth error : ${error}`)
+                console.log(`auth error : ${error}`) // eslint-disable-line
                 return 'none'
             }
         }

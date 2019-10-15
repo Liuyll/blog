@@ -5,21 +5,21 @@ export default class base_controller extends Controller{
         const { ctx } = this
 
         ctx.body = {
-            type:'failed',
-            message:reason
+            type: 'failed',
+            message: reason
         }    
     }
 
     success(payload){
         const { ctx } = this
         ctx.body = {
-            type:'success',
+            type: 'success',
             payload
         }
     }
 
     error(){
-        const {ctx} = this
+        const { ctx } = this
         ctx.throw(500)
     }
 }

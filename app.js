@@ -7,7 +7,7 @@ const handleClientInfo = require('./app/methods/handleSubsMessage').handleClient
 
 const channelMap = {
     'chat/clients': handleClientCount,
-    'chat/clientsInfo':handleClientInfo
+    'chat/clientsInfo': handleClientInfo
 }
 
 module.exports = class AppBoot {

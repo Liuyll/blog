@@ -1,30 +1,62 @@
-import { Service } from 'egg'
+const Service = require('egg').Service
 
-export default class JudgeOtherService extends Service{
+module.exports =  class JudgeOtherService extends Service{
     async index(info,id){
         const {
-            ctx:{
-                model:{
-                    UserInfo
+            ctx: {
+                model: {
+                    UserInfo,
+                    Article,
+                    Judge
                 }
-            }
+            },
+            app
         } = this
 
         info = JSON.parse(info)
         const {
-            id:sendId
+            author,
+            other,
+            content,
+            article
         } = info
 
-        await UserInfo.findByIdAndUpdate(sendId,{
-            $push:{
-                muJudge: info
+        let curJudge = new Judge({
+            author,
+            other,
+            article,
+            content
+        })
+
+        let curJudgeId = curJudge._id
+
+        let createJudge = curJudge.save()
+        let updateAuthor = UserInfo.findOneAndUpdate({ id: author },
+            {
+                $push: {
+                    myJudge: curJudgeId
+                }
+            })
+
+        let updateAcceptor = UserInfo.findOneAndUpdate({ id: other },
+            {
+                $push: {
+                    'info.judge': curJudgeId
+                }
+            })
+
+        let updateArticle = Article.findByIdAndUpdate(article,{
+            $push: {
+                judge: curJudgeId
             }
         })
 
-        await UserInfo.findByIdAndUpdate(id,{
-            $push:{
-                'info.judge':''
-            }
+        return Promise.all([createJudge,updateAcceptor,updateAuthor,updateArticle]).catch(err => {
+            app.ByLog.error({
+                type: 'mongo',
+                reason: `err:${err}`
+            })
+            console.error(err)
         })
     }
 }

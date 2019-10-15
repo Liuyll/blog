@@ -1,0 +1,11 @@
+type Judge {
+    _id: String!
+    author: String
+    other: String
+    time: String
+    like: Int
+    dislike: Int,
+    content: String
+}
+
+

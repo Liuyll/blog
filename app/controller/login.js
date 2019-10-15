@@ -28,7 +28,7 @@ module.exports = class Login extends Controller {
                 ctx.set('Authorization', jwt)
                 return ctx.body = JSON.stringify({
                     type: 'success',
-                    accountId:verify
+                    accountId: verify
                 })
             } else ctx.body = JSON.stringify({
                 type: 'fail',

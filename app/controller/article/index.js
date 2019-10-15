@@ -40,27 +40,28 @@ module.exports = class ArticleController extends Controller {
         try{
             var currentArticle = new ctx.model.Article(article)
             var id = currentArticle._id
+            console.log(id)
             currentArticle.save()
 
             // eslint-disable-next-line
-            var menu = await ctx.model.Menu.findOneAndUpdate({
-                _id:data.type
+            await ctx.model.Menu.findOneAndUpdate({
+                _id: data.type
             },{
-                $push:{
-                    article:id
+                $push: {
+                    article: id
                 }
             },{
-                strict:false
+                strict: false
             })
            
             ctx.body = {
-                type:'success'
+                type: 'success'
             }
 
         }catch(e){
             ctx.response.status = 500
             ctx.body = {
-                type:'error'
+                type: 'error'
             }
             ctx.logger.error(e)
             console.error(e)

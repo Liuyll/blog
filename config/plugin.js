@@ -9,6 +9,10 @@
 //     mongoose: {
 
 // };
+exports.graphql = {
+    enable: true,
+    package: 'egg-graphql'
+}
 
 exports.mongoose = {
     enable: true,
@@ -21,12 +25,12 @@ exports.redis = {
 }
 
 exports.joi = {
-    enable:true,
+    enable: true,
     package: 'egg-joi'
 }
 
 exports.io = {
-    enable:true,
+    enable: true,
     package: 'egg-socket.io'
 }
 

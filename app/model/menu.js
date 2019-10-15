@@ -8,10 +8,10 @@ module.exports = (app) => {
             type: mongoose.Types.ObjectId,
             ref: 'Menu'
         },
-        article:[
+        article: [
             {
-                type:Schema.Types.ObjectId,
-                ref:'Article'
+                type: Schema.Types.ObjectId,
+                ref: 'Article'
             }
         ]
     })

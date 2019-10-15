@@ -11,26 +11,23 @@ module.exports = (app) => {
         signs: Array, //标签
         title: String,
         content: String,
-        judge: [{
-            other: {
+        judge: [
+            {
                 type: Schema.Types.ObjectId,
-                ref: 'Users'
-            },
-            content: String,
-            time: String,
-
-        }],
+                ref: 'Judge'
+            }
+        ],
         addition: {
             like: Number,
             unlike: Number
         },
-        time:{
-            type:String,
-            default:Date.now()
+        time: {
+            type: String,
+            default: Date.now()
         },
-        cover:{
-            type:String,
-            default:'1.jpg'
+        cover: {
+            type: String,
+            default: '1.jpg'
         }
     })
 

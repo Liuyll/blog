@@ -9,21 +9,8 @@ module.exports = (app) => {
         },
         myJudge: [
             {
-                article: {
-                    type: Schema.Types.ObjectId,
-                    ref: 'Article'
-                },
-                content: String,
-                like: {
-                    like: {
-                        type: Number,
-                        default: 0
-                    },
-                    unlike: {
-                        type: Number,
-                        default: 0
-                    }
-                }
+                type: Schema.Types.ObjectId,
+                ref: 'Judge'
             }
         ],
         myArticle: {
@@ -36,14 +23,9 @@ module.exports = (app) => {
         },
         info: {
             judge: [
-                {
-                    content: String,
-                    read: Boolean,
-                    who: {
-                        type: Schema.Types.ObjectId,
-                        ref: 'User'
-                    },
-                    time: Date
+                { 
+                    type: Schema.Types.ObjectId,
+                    ref: 'Judge'
                 }
             ]
         }

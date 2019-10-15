@@ -4,13 +4,17 @@
   "description": "",
   "private": true,
   "egg": {
-    "declarations": true
+    "declarations": true,
+    "typescript": true
   },
   "dependencies": {
     "babel-preset-env": "^1.7.0",
     "babel-register": "^6.26.0",
+    "bunyan": "^1.8.12",
     "colors": "^1.3.3",
+    "dataloader": "^1.4.0",
     "egg": "^2.15.1",
+    "egg-graphql": "^2.6.0",
     "egg-joi": "^1.0.7",
     "egg-mongoose": "^3.2.0",
     "egg-redis": "^2.4.0",
@@ -21,6 +25,7 @@
     "jsonwebtoken": "^8.5.1"
   },
   "devDependencies": {
+    "egg-ts-helper": "^1",
     "autod": "^3.0.1",
     "autod-egg": "^1.1.0",
     "babel-core": "^6.26.3",
