@@ -28,6 +28,15 @@ module.exports = (app) => {
                     ref: 'Judge'
                 }
             ]
+        },
+        draft: {
+            // 编辑已有文章的草稿
+            editDraft: [{
+                type: Schema.Types.ObjectId,
+                ref: 'Article'
+            }],
+            // 新文章的草稿
+            newDraft: String
         }
     })
 

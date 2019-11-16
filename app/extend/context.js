@@ -5,10 +5,12 @@ module.exports = {
     get auth() {
         var identify
         var secure = this.get('authorization')
+   
         if (!secure) return 'none'
         else {
             try {
                 identify = jwt.verify(secure, 'screat')
+                this.id = identify.id
                 return identify ? identify.auth : 'none'
             } catch (error) {
                 console.log(`auth error : ${error}`) // eslint-disable-line
@@ -40,5 +42,8 @@ module.exports = {
     },
     get config(){
         return config
+    },
+    get accountId(){
+        return this.id 
     }
 }

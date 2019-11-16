@@ -21,7 +21,7 @@ module.exports = appInfo => {
         dir: path.join(appInfo.baseDir,'/app/public')
     }
     // add your middleware config here
-    config.middleware = ['graphql','printconnect']
+    config.middleware = ['graphql','printconnect','verifyIsPeople']
 
     // add your user config here
 
@@ -33,6 +33,9 @@ module.exports = appInfo => {
         }
     }
 
+    config.cors = {
+        origin: () => '*'
+    }
     config.redis = {
         clients: {
             subs: {
@@ -88,6 +91,7 @@ module.exports = appInfo => {
         csrf: {
             enable: false,
         },
+        // domainWhiteList: []
     }
 
     config.io = {

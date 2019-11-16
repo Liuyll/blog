@@ -12,5 +12,14 @@ module.exports = {
             meta,
             addition
         }
+    },
+
+    async delay(func,time){
+        await new Promise((resolve) => {
+            setTimeout(() => {
+                func()
+                resolve()      
+            },time)
+        })
     }
 }

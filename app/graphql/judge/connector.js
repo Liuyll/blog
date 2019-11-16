@@ -1,4 +1,5 @@
 const DataLoader = require('dataloader')
+const bunyan = require('../../../config/bunyan')
 
 module.exports = class JudgeConnector {
     constructor(ctx){
@@ -19,6 +20,27 @@ module.exports = class JudgeConnector {
 
     async getJudgeByArticleId(id){
         let result = await this.ctx.service.judge.getJudge.byArticleId(id)
-        return result[0].judge
+        try{
+            result = result.judge
+            result.forEach((comment) => {
+                comment.otherId = comment.other._id
+                comment.authorId = comment.author._id
+                comment.other = comment.other.account
+                comment.author = comment.author.account  
+            })
+
+            return result
+        }catch(err){
+            this.ctx.logger.error(`PATH:graphql getJudgeByArticleIde error:${err}`)
+            bunyan.error(JSON.stringify({
+                type: 'graphql error',
+                reason: `graphql:${err}`
+            }))
+        }
+    }
+
+    async judgeOther(infos){
+        let result = await this.ctx.service.judge.judgeOther.index(infos)
+        return result
     }
 }

@@ -1,7 +1,7 @@
 const Service = require('egg').Service
 
 module.exports =  class JudgeOtherService extends Service{
-    async index(info,id){
+    async index(info){
         const {
             ctx: {
                 model: {

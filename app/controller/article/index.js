@@ -12,14 +12,51 @@ module.exports = class ArticleController extends Controller {
         const { 
             ctx
         } = this
+
+        const queries = ctx.queries
+        const onePageCount = queries.count ? queries.count : 5
+
         try{
-            ctx.body = await ctx.model.Article.find().populate('author').lean()
+            const page = ctx.params.page
+            if(!page){
+                let result = ctx.service.article.getAllArticle.noPage()
+                return ctx.body = {
+                    article: result
+                }
+            }
+
+            const count = (page - 1) * onePageCount
+            const result = await ctx.model.Article.find({},'-content',{ skip: count,limit: 5 }).populate('author').lean()
+            ctx.body = {
+                article: result
+            }
+
         }catch(error){
             ctx.logger.error(`[ 查找全部article时出错 ]error:${error}`)
             ctx.status = 500
             ctx.body = 'error'
         }
     }
+
+    async getArticleTotal(){
+        const {
+            ctx
+        } = this
+
+        return await ctx.service.getArticleTotal.index()
+    }
+
+    async getAllArticleNoPage() {
+        const { 
+            ctx
+        } = this
+
+        let result = await ctx.service.article.getAllArticle.noPage()
+        return ctx.body = {
+            article: result
+        }
+    }
+
     async new() {
        
         const { ctx } = this
@@ -40,7 +77,7 @@ module.exports = class ArticleController extends Controller {
         try{
             var currentArticle = new ctx.model.Article(article)
             var id = currentArticle._id
-            console.log(id)
+
             currentArticle.save()
 
             // eslint-disable-next-line

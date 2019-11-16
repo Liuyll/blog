@@ -4,12 +4,12 @@ export default (app) => {
     const judgeSchema = new Schema({
         author: {
             type: Schema.Types.ObjectId,
-            ref: 'Users',
+            ref: 'User',
             required: true
         },
         other: {
             type: Schema.Types.ObjectId,
-            ref: 'Users',
+            ref: 'User',
             required: true
         },
         article: {
@@ -21,17 +21,15 @@ export default (app) => {
             required: true
         },
         like: {
-            Number,
+            type: Number,
             default: 0
         },
         dislike: {
-            Number,
+            type: Number,
             default: 0
-        },
-        time: {
-            type: Date,
-            default: new Date()
         }
+    },{
+        timestamps: true
     })
 
     return mongoose.model('Judge',judgeSchema,'judges')

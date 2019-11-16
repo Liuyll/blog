@@ -2,10 +2,23 @@ type Judge {
     _id: String!
     author: String
     other: String
-    time: String
+    createdAt: String
     like: Int
-    dislike: Int,
+    dislike: Int
     content: String
+    authorId: String
+    otherId: String
 }
 
 
+input JudgeInfos {
+    author: String!
+    other: String!
+    content: String!
+    article: String!
+}
+
+type ResultInfo {
+    type: String!
+    result: String
+}

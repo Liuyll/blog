@@ -8,10 +8,16 @@ export default class judgeOtherController extends Controller{
         } = this   
 
         await this.ctx.service.judge.judgeOther.index(JSON.stringify(body),id).then((result) => {
-            if(Array.isArray(result) && result.length == 4){
+
+            // promise数组的返回长度,具体见service
+            const MUST_RETURN_RESULT_COUNT = 4
+            if(Array.isArray(result) && result.length == MUST_RETURN_RESULT_COUNT){
                 ctx.body = {
                     type: 'success'
                 }
+            }
+            else ctx.body = {
+                type: 'error'
             }
         })
         

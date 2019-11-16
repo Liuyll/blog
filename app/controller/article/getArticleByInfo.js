@@ -16,8 +16,10 @@ module.exports = class ArticleController extends Controller {
             } = ctx.query
             
             ctx.validate(validator,ctx.query)
-          
-            ctx.body =  await ctx.service.article.getArticleByInfo.byType(type,isAll)
+            
+            const page = ctx.params.page
+            const count = (page - 1) * 5
+            ctx.body =  await ctx.service.article.getArticleByInfo.byType(type,isAll,count)
         } catch (error) {
             ctx.status = 500
             ctx.body = "error"
@@ -39,12 +41,14 @@ module.exports = class ArticleController extends Controller {
     }
 
     async byList(){
-        // console.log('get')
         const { ctx } = this
         const id = ctx.params.id
+        const page = ctx.params.page
+
+        let count = (page - 1) * 5
 
         try {
-            ctx.body =  await ctx.service.article.getArticleByList.index(id)
+            ctx.body =  await ctx.service.article.getArticleByList.index(id,count)
         }catch(error){
             ctx.logger.error('controller getArticleByInfo/byList错误 error'+error)
         }
